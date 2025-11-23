@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineAr Livre - Cinema ao Ar Livre</title>
+    <style>
+        /* Reset e configurações básicas */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #0a1f3a;
+            --secondary: #e63946;
+            --accent: #f1faee;
+            --dark: #1d3557;
+            --light: #a8dadc;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header e Navegação */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--light);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #c1121f;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(10, 31, 58, 0.8), rgba(10, 31, 58, 0.9)), url('https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Seções */
+        section {
+            padding: 5rem 0;
+        }
+        
+        section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+            color: var(--primary);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            color: #666;
+        }
+        
+        /* Serviços */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .service-content {
+            padding: 1.5rem;
+        }
+        
+        .service-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .service-content p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        /* Como funciona */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 0 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        /* Pacotes */
+        .packages {
+            background-color: #f1f5f9;
+        }
+        
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .package-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .package-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .package-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem;
+        }
+        
+        .package-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .package-price {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .package-features {
+            padding: 1.5rem;
+            list-style: none;
+        }
+        
+        .package-features li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .package-features li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Planos Mensais */
+        .monthly-plans {
+            background-color: white;
+        }
+        
+        .plans-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .plans-table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.2rem;
+            text-align: left;
+        }
+        
+        .plans-table td {
+            padding: 1.2rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .plans-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .plans-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .plans-table .highlight {
+            background-color: rgba(230, 57, 70, 0.1);
+            font-weight: 600;
+        }
+        
+        /* Formulário de contato */
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(10, 31, 58, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-message {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+        }
+        
+        .form-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        
+        .form-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.7rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .steps {
+                flex-direction: column;
+            }
+            
+            .plans-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Cine<span>Ar</span> Livre</a>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#como-funciona">Como Funciona</a></li>
+                        <li><a href="#pacotes">Pacotes</a></li>
+                        <li><a href="#planos-mensais">Planos Mensais</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </nav>
+                <a href="#contato" class="btn btn-secondary">Solicitar Orçamento</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Cinema ao Ar Livre Inesquecível</h1>
+            <p>Transformamos qualquer espaço em uma experiência cinematográfica única. Ideal para eventos corporativos, festas particulares, escolas e muito mais.</p>
+            <a href="#servicos" class="btn">Conheça Nossos Serviços</a>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section id="servicos">
+        <div class="container">
+            <h2>Nossos Serviços</h2>
+            <p class="section-subtitle">Oferecemos soluções completas para cinema ao ar livre, desde equipamentos de ótima qualidade até suporte técnico especializado.</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1489599809505-7c8e1c75ce18?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Projeção de Ótima Qualidade</h3>
+                        <p>Projetores de última geração para imagens nítidas e vibrantes, mesmo em ambientes externos.</p>
+                        <a href="#contato" class="btn">Solicitar</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Sistema de Som Profissional</h3>
+                        <p>Caixas de som potentes e claras, garantindo uma experiência sonora imersiva para todos os espectadores.</p>
+                        <a href="#contato" class="btn">Solicitar</a>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1596727147705-61a532a659bd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="service-content">
+                        <h3>Tela de Ótima Qualidade</h3>
+                        <p>Telas de projeção de diversos tamanhos, fáceis de montar e com excelente qualidade de imagem.</p>
+                        <a href="#contato" class="btn">Solicitar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como funciona -->
+    <section id="como-funciona" style="background-color: #f1f5f9;">
+        <div class="container">
+            <h2>Como Funciona</h2>
+            <p class="section-subtitle">Em apenas 4 passos simples, você terá um cinema ao ar livre no local desejado.</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Escolha o Local</h3>
+                    <p>Nos informe onde será o evento. Podemos nos adaptar a diversos tipos de espaços.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Selecione o Pacote</h3>
+                    <p>Escolha entre nossos pacotes ou solicite um personalizado conforme suas necessidades.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Agende a Data</h3>
+                    <p>Defina a data do seu evento e nós cuidaremos de toda a logística.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Aproveite o Cinema</h3>
+                    <p>No dia do evento, nossa equipe monta tudo e você só precisa curtir a experiência.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pacotes -->
+    <section id="pacotes" class="packages">
+        <div class="container">
+            <h2>Nossos Pacotes</h2>
+            <p class="section-subtitle">Oferecemos diferentes opções para atender desde pequenas reuniões familiares até grandes eventos corporativos.</p>
+            
+            <div class="packages-grid">
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3>Básico</h3>
+                        <div class="package-price">R$ 350</div>
+                        <p>Para até 30 pessoas</p>
+                    </div>
+                    <ul class="package-features">
+                        <li>Projeção + Som + Tela</li>
+                        <li>Equipamentos de qualidade</li>
+                        <li>Suporte técnico básico</li>
+                        <li>Instalação e desmontagem</li>
+                    </ul>
+                    <div style="padding: 1.5rem;">
+                        <a href="#contato" class="btn">Solicitar</a>
+                    </div>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3>Intermediário</h3>
+                        <div class="package-price">R$ 600</div>
+                        <p>Para até 50 pessoas</p>
+                    </div>
+                    <ul class="package-features">
+                        <li>Projeção + Som + Tela</li>
+                        <li>Almofadas/Cadeiras</li>
+                        <li>Decoração Simples</li>
+                        <li>Suporte por 5 horas</li>
+                        <li>Instalação e desmontagem</li>
+                    </ul>
+                    <div style="padding: 1.5rem;">
+                        <a href="#contato" class="btn">Solicitar</a>
+                    </div>
+                </div>
+                
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3>Premium</h3>
+                        <div class="package-price">R$ 900</div>
+                        <p>Para até 80 pessoas</p>
+                    </div>
+                    <ul class="package-features">
+                        <li>Projeção + Som + Tela</li>
+                        <li>Almofadas Confortáveis</li>
+                        <li>Decoração Temática</li>
+                        <li>Pipoca Inclusa</li>
+                        <li>Suporte por 6 horas</li>
+                        <li>Instalação e desmontagem</li>
+                    </ul>
+                    <div style="padding: 1.5rem;">
+                        <a href="#contato" class="btn">Solicitar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos Mensais -->
+    <section id="planos-mensais" class="monthly-plans">
+        <div class="container">
+            <h2>Planos Mensais</h2>
+            <p class="section-subtitle">Ideal para empresas, condomínios ou clientes que desejam sessões regulares com desconto fixo.</p>
+            
+            <table class="plans-table">
+                <thead>
+                    <tr>
+                        <th>Plano</th>
+                        <th>Quantidade de Sessões</th>
+                        <th>Incluso</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mensal Light</td>
+                        <td>2 eventos/mês</td>
+                        <td>Projeção + Som + Tela</td>
+                        <td class="highlight">R$ 1.200</td>
+                    </tr>
+                    <tr>
+                        <td>Mensal Plus</td>
+                        <td>4 eventos/mês</td>
+                        <td>Projeção + Som + Tela + Decoração Simples</td>
+                        <td class="highlight">R$ 1.900</td>
+                    </tr>
+                    <tr>
+                        <td>Mensal Premium</td>
+                        <td>4 eventos/mês</td>
+                        <td>Tudo do Plus + Pipoca + Almofadas</td>
+                        <td class="highlight">R$ 2.400</td>
+                    </tr>
+                    <tr>
+                        <td>Grandes Eventos</td>
+                        <td>Sob consulta</td>
+                        <td>Tudo incluso para eventos maiores (empresas, condomínios)</td>
+                        <td class="highlight">R$ 2.000+</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato">
+        <div class="container">
+            <h2>Entre em Contato</h2>
+            <p class="section-subtitle">Solicite um orçamento personalizado ou tire suas dúvidas sobre nossos serviços.</p>
+            
+            <div class="contact-form">
+                <div id="form-message" class="form-message"></div>
+                <div id="loading" class="loading">
+                    <div class="loading-spinner"></div>
+                    <span>Enviando mensagem...</span>
+                </div>
+                
+                <form id="form-contato" action="https://formsubmit.co/lucaspereiraduraes07@gmail.com" method="POST">
+                    <!-- Configurações do FormSubmit -->
+                    <input type="hidden" name="_subject" value="Novo contato do site CineAr Livre">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="">
+                    
+                    <div class="form-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="evento">Tipo de Evento</label>
+                        <select id="evento" name="evento" class="form-control" required>
+                            <option value="">Selecione...</option>
+                            <option value="familiar">Familiar</option>
+                            <option value="corporativo">Corporativo</option>
+                            <option value="escolar">Escolar</option>
+                            <option value="comunitario">Comunitário</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="data">Data Prevista</label>
+                        <input type="date" id="data" name="data" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pacote">Pacote de Interesse</label>
+                        <select id="pacote" name="pacote" class="form-control">
+                            <option value="">Selecione...</option>
+                            <option value="basico">Básico (R$ 350)</option>
+                            <option value="intermediario">Intermediário (R$ 600)</option>
+                            <option value="premium">Premium (R$ 900)</option>
+                            <option value="mensal-light">Mensal Light (R$ 1.200)</option>
+                            <option value="mensal-plus">Mensal Plus (R$ 1.900)</option>
+                            <option value="mensal-premium">Mensal Premium (R$ 2.400)</option>
+                            <option value="grandes-eventos">Grandes Eventos (R$ 2.000+)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pessoas">Número Aproximado de Pessoas</label>
+                        <input type="number" id="pessoas" name="pessoas" class="form-control" min="1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" class="form-control" placeholder="Descreva seu evento, local, necessidades especiais ou qualquer informação adicional..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn" style="width: 100%;">Enviar Solicitação</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CineAr Livre</h3>
+                    <p>Especialistas em cinema ao ar livre, transformando momentos comuns em experiências memoráveis.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f">f</i></a>
+                        <a href="#"><i class="fab fa-instagram">i</i></a>
+                        <a href="#"><i class="fab fa-whatsapp">w</i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#como-funciona">Como Funciona</a></li>
+                        <li><a href="#pacotes">Pacotes</a></li>
+                        <li><a href="#planos-mensais">Planos Mensais</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li>📞 (19) 99747-1543</li>
+                        <li>✉️ lucaspereiraduraes07@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 CineAr Livre - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Configuração do formulário
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('form-contato');
+            const messageDiv = document.getElementById('form-message');
+            const loadingDiv = document.getElementById('loading');
+            
+            // Configurar a URL de redirecionamento após o envio
+            const nextUrl = window.location.href.split('?')[0] + '?success=true';
+            document.querySelector('input[name="_next"]').value = nextUrl;
+            
+            // Verificar se há parâmetro de sucesso na URL
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === 'true') {
+                showMessage('Mensagem enviada com sucesso! Entraremos em contato em breve.', 'success');
+            }
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validação básica
+                if (!validateForm()) {
+                    return;
+                }
+                
+                // Mostrar loading
+                loadingDiv.style.display = 'block';
+                messageDiv.style.display = 'none';
+                
+                // Enviar formulário
+                const formData = new FormData(form);
+                
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        showMessage('Mensagem enviada com sucesso! Entraremos em contato em breve.', 'success');
+                        form.reset();
+                    } else {
+                        throw new Error('Erro ao enviar mensagem');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    showMessage('Erro ao enviar mensagem. Tente novamente ou entre em contato diretamente pelo telefone.', 'error');
+                })
+                .finally(() => {
+                    loadingDiv.style.display = 'none';
+                });
+            });
+            
+            function validateForm() {
+                const nome = document.getElementById('nome').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const telefone = document.getElementById('telefone').value.trim();
+                const evento = document.getElementById('evento').value;
+                const data = document.getElementById('data').value;
+                const mensagem = document.getElementById('mensagem').value.trim();
+                
+                if (!nome) {
+                    showMessage('Por favor, preencha seu nome.', 'error');
+                    return false;
+                }
+                
+                if (!email) {
+                    showMessage('Por favor, preencha seu e-mail.', 'error');
+                    return false;
+                }
+                
+                if (!isValidEmail(email)) {
+                    showMessage('Por favor, insira um e-mail válido.', 'error');
+                    return false;
+                }
+                
+                if (!telefone) {
+                    showMessage('Por favor, preencha seu telefone.', 'error');
+                    return false;
+                }
+                
+                if (!evento) {
+                    showMessage('Por favor, selecione o tipo de evento.', 'error');
+                    return false;
+                }
+                
+                if (!data) {
+                    showMessage('Por favor, selecione a data prevista.', 'error');
+                    return false;
+                }
+                
+                if (!mensagem) {
+                    showMessage('Por favor, escreva uma mensagem.', 'error');
+                    return false;
+                }
+                
+                return true;
+            }
+            
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            
+            function showMessage(text, type) {
+                messageDiv.textContent = text;
+                messageDiv.className = 'form-message ' + type;
+                messageDiv.style.display = 'block';
+                
+                // Rolar para a mensagem
+                messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
